@@ -1,7 +1,8 @@
+import os
+import sys
+import time
 import requests as rq
 from bs4 import BeautifulSoup
-import os
-import time
 
 
 page_url = "http://www.shmeea.edu.cn/page/08000/20200806/14399.html"
@@ -9,7 +10,7 @@ ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like 
 headers = {
     "User-Agent": ua
 }
-key =  os.environ["KEY"]
+key = os.environ["KEY"]
 
 
 def get_sleep_time():
@@ -44,7 +45,7 @@ def query():
     try:
         resp = rq.get(page_url, headers=headers)
     except:
-        notify("???","")
+        notify("???", "")
     resp.encoding = "utf-8"
     soup = BeautifulSoup(resp.text)
     tr = soup.findAll("tr")[6]
@@ -65,7 +66,6 @@ def query():
         print("已发送")
         print(markdown)
         notify("!!!", markdown)
-        import sys
         sys.exit()
 
 
